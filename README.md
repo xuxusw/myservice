@@ -109,14 +109,17 @@ myservice/
 # Build image
 docker build -t myservice .
 
-# Run container
-docker run -d -p 8080:8080 --name myservice myservice
+# Run container (without Swagger UI)
+docker run -d -p 8080:8080 --name myservice_test myservice 
 
-# Or using docker compose (docker-compose)
+# Or using docker compose (with Swagger UI)
 docker compose up -d
 (docker-compose up -d)
 ```
-Service available at: http://localhost:8080
+* Service available at: http://localhost:8080 
+* Swagger UI documentation available at: http://localhost:8081
+
+**Note:** Swagger UI in browser may show CORS errors. For live testing, use Postman (import `openapi.yaml`) or curl commands.
 
 ## Examples
 ### Register
@@ -231,7 +234,8 @@ curl -X POST http://localhost:8080/api/projects/1/tasks \
 OpenAPI 3.0 specification: [`openapi.yaml`](openapi.yaml).
 Created with VS Code OpenAPI extension and validated in Swagger Editor. 
 
-To view interactive documentation: [Swagger UI](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/xuxusw/myservice/main/openapi.yaml).
+View interactive documentation at `http://localhost:8081` Swagger UI (after `docker compose up -d`).
+Or view without running service [Swagger Editor](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/xuxusw/myservice/main/openapi.yaml) (CORS errors. For live testing, use Postman (import `openapi.yaml`) or curl commands.)
 
 
 ## Makefile
